@@ -1,0 +1,44 @@
+ <% layout("../layouts/boilerplate") %>
+<head>
+    <link rel="stylesheet" href="/css/first.css"> <!-- Custom CSS -->
+</head>
+<body>
+    <form method="post" action="/list/edit/form/<%=data.id%>?_method=PUT" novalidate class="needs-validation">
+        <h1>Create Listing</h1>
+
+        <div class="form-group">
+            <label for="title">Title</label>
+            <textarea id="title" name="listing[title]" placeholder="Enter title"  class="form-control"  required><%=data.title%></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="listing[description]" placeholder="Enter description" class="form-control"  required><%=data.description%></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price</label>
+            <textarea id="price" name="listing[price]" placeholder="Enter price" class="form-control"  required><%=data.price%></textarea>
+        </div>
+
+        <div class="location-country">
+            <div class="form-group">
+                <label for="location">Location</label>
+                <textarea id="location" name="listing[location]" placeholder="Enter location" class="form-control"  required><%=data.location%></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="country">Country</label>
+                <textarea id="country" name="listing[country]" placeholder="Enter country" class="form-control"  required><%=data.country%></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="image-url">Image URL</label>
+            <textarea id="image-url" name="listing[image][url]" placeholder="Enter image URL"><%=data.image.url%></textarea>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+    
+</body>

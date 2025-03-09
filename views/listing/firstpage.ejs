@@ -1,0 +1,30 @@
+<% layout("../layouts/boilerplate") %>
+<head>
+    <link rel="stylesheet" href="/css/first.css"> <!-- Custom CSS -->
+</head>
+<body>
+    <header class="text-center my-4">
+        <h1 class="display-5 fw-bold text-primary">Welcome to the First Page</h1>
+    </header>
+
+    <main class="container">
+        
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <% data.forEach((item) => { %>
+                <div class="col first-page mb-4 px-6 ">
+                    <a href="/list/<%= item.id %>" class="text-decoration-none">
+                        <div class="card shadow-sm h-100">
+                            <img src="<%= item.image.url %>" class="card-img-top " alt="Image">
+                            <div class="card-body">
+                                <h5 class="card-title text-dark fw-bold"><%= item.title %></h5>
+                                <p class="text-muted"><%= item.description %></p>
+                                <h6 class="text-success fw-bold">₹<%= item.price %></h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            <% }); %>
+        </div>
+    </main>
+</body>

@@ -1,0 +1,287 @@
+/* General Page Styling */
+body {
+    background-color: #e4e8eb; /* Light background */
+}
+.container{
+    background: #efeaea;
+    width: 100vw;
+}
+.one{
+    background-color: rgb(240, 240, 233);
+}
+/* Centering the First Page */
+.first-page {
+    text-align: center;
+    padding: 10px;
+}
+
+/* Row Spacing */
+.row {
+    margin-left: -8px;
+    margin-right: -8px;
+}
+
+/* Column Padding */
+.first-page .col {
+    padding: 10px; /* Adds space between columns */
+}
+
+/* Card Styling */
+.first-page .card {
+    width: 24rem; /* Fixed width for all cards */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border-radius: 12px;
+    overflow: hidden;
+    border: none;
+    margin: auto; /* Centers the card inside the column */
+}
+
+/* Card Hover Effect */
+.first-page .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Image Styling with Proper Spacing */
+.first-page .card img {
+    width: 100%;  /* Full width of the card */
+    height: 290px; /* Consistent height */
+    object-fit: cover; /* Ensures images are cropped correctly */
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    padding: 8px; /* Adds space around the image */
+}
+
+/* Card Body Styling */
+.first-page .card-body {
+    text-align: center;
+    padding: 15px;
+}
+
+/* Title Styling */
+.first-page .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #343a40;
+}
+
+/* Description Styling */
+.first-page .text-muted {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* Price Styling */
+.first-page .text-success {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #28a745;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .row-cols-lg-4 > .first-page {
+        flex: 0 0 33.333%; /* 3 cards per row on large screens */
+        max-width: 33.333%;
+    }
+}
+
+@media (max-width: 992px) {
+    .row-cols-md-2 > .first-page {
+        flex: 0 0 50%; /* 2 cards per row on medium screens */
+        max-width: 50%;
+    }
+}
+
+@media (max-width: 768px) {
+    .row-cols-1 > .first-page {
+        flex: 0 0 100%; /* 1 card per row on small screens */
+        max-width: 100%;
+    }
+
+    .first-page .card {
+        width: 100%; /* Full width for smaller screens */
+    }
+
+    .first-page .card img {
+        height: 200px; /* Adjust height for smaller screens */
+        padding: 5px; /* Adds space around images */
+    }
+}
+/* General Form Styling */
+form {
+    max-width: 800px;  /* Increased width */
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Header */
+form h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #343a40;
+    margin-bottom: 20px;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Labels */
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+/* Input Fields */
+form textarea {
+    width: 100%;
+    height: 50px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    font-size: 1rem;
+    transition: all 0.3s ease-in-out;
+    resize: none;
+}
+
+/* Flex Row for Location & Country */
+.location-country {
+    display: flex;
+    gap: 20px;
+}
+
+/* Half-Width Inputs */
+.location-country .form-group {
+    flex: 1;
+}
+
+/* Textarea Focus Effect */
+form textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+/* Submit Button */
+form button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    form {
+        max-width: 95%;
+    }
+
+    .location-country {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+/* Center the listing container */
+.listing-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Title Styling */
+.listing-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Image Styling */
+.listing-image {
+    width: 100%;
+    max-height: 350px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+/* Listing Information */
+.listing-info {
+    list-style: none;
+    padding: 0;
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.listing-info li {
+    margin-bottom: 10px;
+}
+
+/* Buttons Container */
+.listing-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Edit and Delete Buttons */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-edit {
+    background: #28a745;
+    color: white;
+}
+
+.btn-edit:hover {
+    background: #218838;
+}
+
+.btn-delete {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #c82333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .listing-container {
+        width: 90%;
+    }
+
+    .listing-image {
+        max-height: 250px;
+    }
+}

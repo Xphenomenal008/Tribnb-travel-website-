@@ -65,7 +65,7 @@
                                 <h5 class="card-title">Rating: ⭐ <%= review.rating %> / 5</h5>
                                 <p class="card-text"><%= review.comment %></p>
                                 <p class="text-muted"><small>Reviewed on <%= review.createdate.toDateString() %></small></p>
-                                <form action="/list/<%=data.id%>/review/<%=review._id%>?_method=DELETE" method="post">
+                                <form action="/list/<%=data.id%>/reviews/<%=review._id%>?_method=DELETE" method="post">
                                     <button>Delete</button>
                                 </form>
                             </div>

@@ -1,25 +1,69 @@
-<nav class="navbar navbar-expand-lg bg-light shadow-sm fixed-top">
+<head>
+    <link rel="stylesheet" href="/css/first.css"> <!-- Custom CSS -->
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand d-flex align-items-center" href="#">
-            <i class="fas fa-globe-americas text-primary me-2"></i> TravelSite
+        <!-- Brand Logo & Name -->
+        <a class="navbar-brand d-flex align-items-center fw-bold fs-4" href="/">
+            <i class="fas fa-globe-americas text-primary me-2 fs-3"></i> TravelSite
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+
+        <!-- Mobile Toggler Button -->
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" 
             data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" 
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
+
+        <!-- Navbar Links -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav align-items-center gap-3">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    <a class="nav-link" href="/" data-route="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/list">All Listings</a>
+                    <a class="nav-link" href="/list" data-route="/list">All Listings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/list/create">Add New Listing</a>
+                    <a class="nav-link" href="/list/create" data-route="/list/create">Add New Listing</a>
                 </li>
+
+                <% if(!user){ %>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary px-4 py-2" href="/list/user/Signup" data-route="/list/user/Signup">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary px-4 py-2 text-white" href="/list/user/login" data-route="/list/user/login">Login</a>
+                    </li>
+                <% } %>
+
+                <% if(user){ %>
+                    <li class="nav-item">
+                        <a class="btn btn-danger px-4 py-2 text-white" href="/list/user/logout" data-route="/list/user/logout">Logout</a>
+                    </li>
+                <% } %>
             </ul>
         </div>
     </div>
 </nav>
+
+<!-- JavaScript for Active Link Highlight -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll(".nav-link, .btn");
+
+        navLinks.forEach(link => {
+            if (link.getAttribute("data-route") === currentPath) {
+                link.classList.add("active-link");
+            }
+        });
+    });
+</script>
+
+ 
+ 
+
+
+ 

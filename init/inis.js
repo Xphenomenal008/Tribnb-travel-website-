@@ -11,12 +11,14 @@ main().then(()=>{
 console.log("connected sucessfully!!")
 })
 
-listing.insertMany(data).then(()=>{
-   console.log("stored sucessfully!!! ")
-}).catch((e)=>{
-  console.log(e)
- })
 
+const initdb=async()=>{
+   await listing.deleteMany({}); //if exists
+  let init= data.map((data)=>({...data,owner:"67d425d8366d1ab235e20acc"}));
+  await listing.insertMany(init)
+  console.log("init sucess!!")
+}
+initdb()
 
 
 

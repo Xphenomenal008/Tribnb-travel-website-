@@ -8,7 +8,7 @@
         
         <div class="listing-card">
             <img src="<%= data.image.url %>" alt="Listing Image" class="listing-image" />
-
+             <span>Created by: <%=data.owner.username%></span>
             <ul class="listing-info">
                  
                 <li><strong>Description:</strong> <%= data.description %></li>
@@ -27,30 +27,33 @@
             </div>
         </div>
     </div>
-    <div class="container mt-5" >
-        <div class="col-md-8 offset-md-2 bg-light p-4 rounded shadow">
-            <h4 class="text-center">Leave a Review</h4>
-            <form  action="/list/<%=data.id%>/reviews"  method="post" id="reviewForm" class="needs-validation" novalidate>
-                
-                <!-- Rating -->
-                <div class="mb-3">
-                    <label for="rating" class="form-label">Rating (1-5)</label>
-                    <input type="range" id="rating" min="1" max="5" name="review[rating]" class="form-range" required>
-                    <div class="invalid-feedback">Please select a rating.</div>
-                </div>
-    
-                <!-- Comment -->
-                <div class="mb-3">
-                    <label for="comment" class="form-label">Comments</label>
-                    <textarea id="comment" name="review[comment]" class="form-control" required></textarea>
-                    <div class="invalid-feedback">Please enter some text.</div>
-                </div>
-    
-                <!-- Submit Button -->
-                <button type="submit" class="btn btn-primary w-100">Submit</button>
-            </form>
+   <% if(user){%>
+        <div class="container mt-5" >
+            <div class="col-md-8 offset-md-2 bg-light p-4 rounded shadow">
+                <h4 class="text-center">Leave a Review</h4>
+                <form  action="/list/<%=data.id%>/reviews"  method="post" id="reviewForm" class="needs-validation" novalidate>
+                    
+                    <!-- Rating -->
+                    <div class="mb-3">
+                        <label for="rating" class="form-label">Rating (1-5)</label>
+                        <input type="range" id="rating" min="1" max="5" name="review[rating]" class="form-range" required>
+                        <div class="invalid-feedback">Please select a rating.</div>
+                    </div>
+        
+                    <!-- Comment -->
+                    <div class="mb-3">
+                        <label for="comment" class="form-label">Comments</label>
+                        <textarea id="comment" name="review[comment]" class="form-control" required></textarea>
+                        <div class="invalid-feedback">Please enter some text.</div>
+                    </div>
+        
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary w-100">Submit</button>
+                </form>
+            </div>
         </div>
-    </div>
+   <% }%>
+  
     <%if(data.reviews.length===0){%>
      <div class="first-page"><strong>No reviews till now!! Be the first☺️</strong></div>
         
@@ -63,11 +66,15 @@
                         <div class="card mb-3 shadow-sm">
                             <div class="card-body">
                                 <h5 class="card-title">Rating: ⭐ <%= review.rating %> / 5</h5>
+                                <p class="card-text">created by: <%= review.author.username %></p>
                                 <p class="card-text"><%= review.comment %></p>
                                 <p class="text-muted"><small>Reviewed on <%= review.createdate.toDateString() %></small></p>
-                                <form action="/list/<%=data.id%>/reviews/<%=review._id%>?_method=DELETE" method="post">
-                                    <button>Delete</button>
-                                </form>
+                                <%if(user){%>
+                                    <form action="/list/<%=data.id%>/reviews/<%=review._id%>?_method=DELETE" method="post">
+                                        <button>Delete</button>
+                                    </form>
+                               <%}%>
+                                
                             </div>
                         </div>
                     </div>

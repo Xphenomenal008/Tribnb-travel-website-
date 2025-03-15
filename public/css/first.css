@@ -78,36 +78,6 @@ body {
     color: #28a745;
 }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
-    .row-cols-lg-4 > .first-page {
-        flex: 0 0 33.333%; /* 3 cards per row on large screens */
-        max-width: 33.333%;
-    }
-}
-
-@media (max-width: 992px) {
-    .row-cols-md-2 > .first-page {
-        flex: 0 0 50%; /* 2 cards per row on medium screens */
-        max-width: 50%;
-    }
-}
-
-@media (max-width: 768px) {
-    .row-cols-1 > .first-page {
-        flex: 0 0 100%; /* 1 card per row on small screens */
-        max-width: 100%;
-    }
-
-    .first-page .card {
-        width: 100%; /* Full width for smaller screens */
-    }
-
-    .first-page .card img {
-        height: 200px; /* Adjust height for smaller screens */
-        padding: 5px; /* Adds space around images */
-    }
-}
 /* General Form Styling */
 form {
     max-width: 800px;  /* Increased width */
@@ -284,4 +254,59 @@ form button:hover {
     .listing-image {
         max-height: 250px;
     }
+}
+.navbar {
+    padding: 18px 0;
+    font-size: 1.1rem;
+}
+
+.nav-link {
+    transition: 0.3s ease-in-out;
+    font-size: 1.1rem;
+    color: #333 !important;
+    padding: 10px 15px;
+}
+
+.nav-link:hover {
+    color: #007bff !important;
+    transform: scale(1.05);
+}
+
+/* Active Link Highlight */
+.active-link {
+    font-weight: bold;
+    color: #007bff !important;
+    border-bottom: 3px solid #007bff;
+}
+
+.btn {
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 10px 16px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-outline-primary {
+    border-color: #007bff;
+    color: #007bff;
+}
+
+.btn-outline-primary:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #bb2d3b;
+    border-color: #bb2d3b;
 }

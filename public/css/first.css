@@ -28,7 +28,7 @@ body {
 
 /* Card Styling */
 .first-page .card {
-    width: 24rem; /* Fixed width for all cards */
+     /* Fixed width for all cards */
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     border-radius: 12px;
     overflow: hidden;
@@ -45,8 +45,8 @@ body {
 /* Image Styling with Proper Spacing */
 .first-page .card img {
     width: 100%;  /* Full width of the card */
-    height: 290px; /* Consistent height */
-    object-fit: cover; /* Ensures images are cropped correctly */
+    height: 400px; /* Consistent height */
+    object-fit: fill; /* Ensures images are cropped correctly */
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
     padding: 8px; /* Adds space around the image */

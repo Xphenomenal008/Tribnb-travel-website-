@@ -1,6 +1,11 @@
 //we pass these middlewares whereever they needed..we know they runs after user send req and before sending back res to user!!
 const listing=require("./model/model.js")//our collections
 const review=require("./model/review.js")//our collections
+const {listingschema}=require("./schema.js")//here joi works
+const {reviewschemas}=require("./schema.js")
+const ExpressError=require("./views/utilities/ExpressError.js");
+
+
 module.exports.isLoggedIn=(req,res,next)=>{
     if(!req.isAuthenticated()){ //this is a passport method if it returns obj mean user data is present mean login or else give undefined mean not have user data
         req.session.redirectUrl = req.originalUrl;//if userlogin his info come from which page he has came and we store that info 
@@ -40,4 +45,26 @@ module.exports.isreviewowner=async(req,res,next)=>{
 
 
     next()
+}
+
+module.exports.validating=(req,res,next)=>{//this is where joi is working fo schema validation 
+    let {error}=listingschema.validate(req.body)
+    if(error){
+        throw new ExpressError("400",error)
+    }else{
+        next()
+    }
+
+
+}
+
+module.exports.validating2=(req,res,next)=>{//this is where joi is working fo schema validation 
+    let {error}=reviewschemas.validate(req.body)
+    if(error){
+        throw new ExpressError("400",error)
+    }else{
+        next()
+    }
+
+
 }

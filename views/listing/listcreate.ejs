@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"><!-- Custom CSS -->
 </head>
 <body>
-    <form method="post" action="/list/new" novalidate class="needs-validation">
+    <form method="post" action="/list/new" novalidate class="needs-validation" enctype="multipart/form-data">
         <h1>Create Listing</h1>
 
         <div class="form-group">
@@ -20,6 +20,24 @@
             <textarea id="description" name="listing[description]" placeholder="Enter description" class="form-control"  required></textarea>
             <div class="invalid-feedback">
                 Please choose a Description.
+              </div>
+        </div>
+        <div class="form-group">
+            <label for="description">Category</label>
+            <select name="listing[category]" id="category" required>
+                <option value="">Select a category</option>  <!-- Prevents empty submission -->
+                <option value="Amazing pools">Amazing pools</option>
+                <option value="Rooms">Rooms</option>
+                <option value="Mountains">Mountains</option>
+                <option value="Farm">Farm</option>
+                <option value="Camping">Camping</option>
+                <option value="Domes">Domes</option>
+                <option value="Boats">Boats</option>
+                <option value="Artic">Artic</option>
+            </select>
+            
+            <div class="invalid-feedback">
+                Please choose a category.
               </div>
         </div>
 
@@ -48,10 +66,12 @@
                   </div>
             </div>
         </div>
-
         <div class="form-group">
-            <label for="image-url">Image URL</label>
-            <textarea id="image-url" name="listing[image][url]" placeholder="Enter image URL" ></textarea>
+            <label for="image-url">Image </label>
+            <input id="image-url" name="listing[image]" type="file" placeholder="Enter image URL" required>
+            <div class="invalid-feedback">
+                Please choose a image.
+              </div>
         </div>
 
         <button type="submit">Submit</button>

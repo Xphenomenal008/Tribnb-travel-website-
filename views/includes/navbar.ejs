@@ -1,69 +1,199 @@
 <head>
-    <link rel="stylesheet" href="/css/first.css"> <!-- Custom CSS -->
-</head>
-
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
-    <div class="container-fluid">
-        <!-- Brand Logo & Name -->
-        <a class="navbar-brand d-flex align-items-center fw-bold fs-4" href="/">
-            <i class="fas fa-globe-americas text-primary me-2 fs-3"></i> TravelSite
-        </a>
-
-        <!-- Mobile Toggler Button -->
-        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" 
-            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" 
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- Navbar Links -->
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav align-items-center gap-3">
-                <li class="nav-item">
-                    <a class="nav-link" href="/" data-route="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/list" data-route="/list">All Listings</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/list/create" data-route="/list/create">Add New Listing</a>
-                </li>
-
-                <% if(!user){ %>
-                    <li class="nav-item">
-                        <a class="btn btn-outline-primary px-4 py-2" href="/list/user/Signup" data-route="/list/user/Signup">Sign Up</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-primary px-4 py-2 text-white" href="/list/user/login" data-route="/list/user/login">Login</a>
-                    </li>
-                <% } %>
-
-                <% if(user){ %>
-                    <li class="nav-item">
-                        <a class="btn btn-danger px-4 py-2 text-white" href="/list/user/logout" data-route="/list/user/logout">Logout</a>
-                    </li>
-                <% } %>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<!-- JavaScript for Active Link Highlight -->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const currentPath = window.location.pathname;
-        const navLinks = document.querySelectorAll(".nav-link, .btn");
-
-        navLinks.forEach(link => {
-            if (link.getAttribute("data-route") === currentPath) {
-                link.classList.add("active-link");
+ 
+    
+    <!-- Bootstrap CSS (Make sure versions match) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* Ensure navbar is fully responsive */
+        @media (max-width: 992px) {
+            .navbar-collapse {
+                max-height: 80vh;
+                overflow-y: auto;
             }
+
+            #search {
+                flex-direction: column;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+
+            .search-input, .search-btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .navbar-nav {
+                align-items: stretch !important;
+            }
+
+            .navbar-nav .nav-item {
+                width: 100%;
+                text-align: center;
+            }
+
+            .navbar-nav .btn {
+                display: block;
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+
+        body {
+            padding-top: 80px;
+        }
+
+        .navbar-toggler {
+            border: none;
+            outline: none;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+        .active-link {
+        color: #ff5722 !important; /* Change this to your desired highlight color */
+        font-weight: bold;
+        border-bottom: 2px solid #ff5722; /* Underline effect */
+    }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container-fluid">
+            <!-- Brand Logo & Name -->
+            <a class="navbar-brand d-flex align-items-center fw-bold fs-4 always-orange" href="/list">
+                <i class="fas fa-fire me-2"></i> Tribnb
+            </a>
+            
+            <!-- Mobile Toggler Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Navbar Content -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Search Bar (Centered & Compact) -->
+                <div id="search" class="d-flex mx-auto align-items-center" role="search">
+                    <input type="text" class="search-input" placeholder="Search" aria-label="Search">
+                    <button class="search-btn" type="submit">Search</button>
+                </div>
+                
+                <!-- Navbar Links -->
+                <ul class="navbar-nav align-items-center gap-3 ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link mobile-close" href="/list" data-route="/list">Explore</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mobile-close" href="/list/create" data-route="/list/create">Airbnb your home</a>
+                    </li>
+                    
+                    <!-- Conditional Login/Signup Links -->
+                    <% if(!user){ %>
+                    <li class="nav-item">
+                        <a class="btn btn-orange mobile-close px-4 py-2" href="/list/user/Signup" data-route="/list/user/Signup">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-orange mobile-close px-4 py-2" href="/list/user/login" data-route="/list/user/login">Login</a>
+                    </li>
+                    <% } %>
+                    
+                    <% if(user){ %>
+                    <li class="nav-item">
+                        <a class="btn btn-danger mobile-close px-4 py-2 text-white" href="/list/user/logout" data-route="/list/user/logout">Logout</a>
+                    </li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+     
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Active link detection
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll(".nav-link, .navbar-nav .nav-item a[data-route]");
+            navLinks.forEach(link => {
+                let route = link.getAttribute("data-route");
+                if (route === currentPath) {
+                    link.classList.add("active-link");
+                }
+            });
+
+            // Multiple methods to close navbar
+            const mobileLinks = document.querySelectorAll('.mobile-close');
+            const navbarCollapse = document.getElementById('navbarNav');
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            const search=document.querySelector(".search-input")
+            const searchbtn=document.querySelector(".search-btn")
+             
+             
+
+
+
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Method 1: Using Bootstrap's collapse method
+                    if (window.innerWidth < 992) {
+                        const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                            toggle: false
+                        });
+                        bsCollapse.hide();
+
+                        // Method 2: Manually removing class
+                        navbarCollapse.classList.remove('show');
+                        
+                        // Method 3: Resetting aria attributes
+                        navbarToggler.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+
+            // Fallback click outside to close
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth < 992 && 
+                    navbarCollapse.classList.contains('show') && 
+                    !navbarCollapse.contains(event.target) && 
+                    !navbarToggler.contains(event.target)) {
+                    const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                        toggle: false
+                    });
+                    bsCollapse.hide();
+                }
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+        const navLinks = document.querySelectorAll(".nav-link, .navbar-nav .nav-item a[data-route]");
+
+        function setActiveLink(route) {
+            navLinks.forEach(link => {
+                if (link.getAttribute("data-route") === route) {
+                    link.classList.add("active-link");
+                } else {
+                    link.classList.remove("active-link");
+                }
+            });
+        }
+
+        // Set active link based on current URL
+        const currentPath = window.location.pathname;
+        setActiveLink(currentPath);
+
+        // Set active link on click
+        navLinks.forEach(link => {
+            link.addEventListener("click", function () {
+                setActiveLink(link.getAttribute("data-route"));
+            });
         });
     });
-</script>
-
- 
- 
-
-
- 
+    </script>
+</body>
+</html>

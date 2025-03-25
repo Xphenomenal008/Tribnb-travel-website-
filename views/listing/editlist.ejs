@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="/css/first.css"> <!-- Custom CSS -->
 </head>
 <body>
-    <form method="post" action="/list/edit/form/<%=data.id%>?_method=PUT" novalidate class="needs-validation">
+    <form method="post" action="/list/edit/form/<%=data.id%>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
         <h1>Create Listing</h1>
 
         <div class="form-group">
@@ -34,8 +34,11 @@
         </div>
 
         <div class="form-group">
-            <label for="image-url">Image URL</label>
-            <textarea id="image-url" name="listing[image][url]" placeholder="Enter image URL"><%=data.image.url%></textarea>
+           <img class="editimg" src="<%=newimg%>" >
+        </div>
+        <div class="form-group">
+            <label for="image-url">Update Image</label>
+            <input id="image-url" type="file" name="listing[image]">
         </div>
 
         <button type="submit">Submit</button>

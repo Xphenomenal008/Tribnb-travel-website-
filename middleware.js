@@ -47,16 +47,23 @@ module.exports.isreviewowner=async(req,res,next)=>{
     next()
 }
 
-module.exports.validating=(req,res,next)=>{//this is where joi is working fo schema validation 
-    let {error}=listingschema.validate(req.body)
-    if(error){
-        throw new ExpressError("400",error)
-    }else{
-        next()
+module.exports.validating = (req, res, next) => {
+    console.log("🚀 Incoming Request Body:", req.body); // Debugging log
+    console.log("📂 Uploaded File:", req.file); // Debugging log for multer
+
+    if (!req.body.listing) {
+        return res.status(400).json({ error: "❌ 'listing' is missing from req.body!" });
     }
 
+    const { error } = listingschema.validate(req.body);
+    if (error) {
+        throw new ExpressError("400",error)
+    }
 
-}
+    next();
+};
+
+
 
 module.exports.validating2=(req,res,next)=>{//this is where joi is working fo schema validation 
     let {error}=reviewschemas.validate(req.body)

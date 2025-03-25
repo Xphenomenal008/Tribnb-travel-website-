@@ -1,3 +1,5 @@
+require('dotenv').config();//so that we can use our env varibles
+const MongoStore = require("connect-mongo"); 
 const express=require("express")
 const engine = require('ejs-mate'); 
   
@@ -5,6 +7,7 @@ const methodOverride = require('method-override')
 const mongoose=require("mongoose")
 const app=express()
 const url='mongodb://127.0.0.1:27017/wanderlust'
+const dbUrl=process.env.DBURL
 const session=require("express-session")
 const flash=require("connect-flash")
 
@@ -14,6 +17,8 @@ app.set('views', [path.join(__dirname, 'views', 'listing'), path.join(__dirname,
 
 app.use(express.static(path.join(__dirname,'public')))
 app.use(express.urlencoded({extended:true}))
+
+app.use(express.json()); // Parses JSON requests
 app.use(methodOverride('_method'));
 app.engine('ejs', engine);
 
@@ -32,7 +37,7 @@ const {isLoggedIn}=require("./middleware.js")
 
 //made connection with our local database
 const main=async()=>{
- await mongoose.connect(url);
+ await mongoose.connect(dbUrl);
 }
 main().then(()=>{
 console.log("connected sucessfully!!")
@@ -51,9 +56,20 @@ app.use((req,res,next)=>{
 
 // app.use(cokkieparser()) ///middleware help to use that cokkies or 
 
+const store=MongoStore.create({
+  mongoUrl:dbUrl,
+  crypto:{
+    secret:"mysupersecretcode"
+  },
+  touchAfter: 24*3600,
 
+});
+store.on("error",()=>{
+  console.log("err in monogostore",err)
+})
 
 const sessionoptions={
+  store,
   secret:"mysupersecretcode",
   resave:false,
   saveUninitialized:true,
@@ -92,7 +108,7 @@ app.use((req,res,next)=>{ //whichever varible from server side to client side we
 
 app.get("/",async(req,res)=>{
 //  console.log(req.cookies)//here we using saved cokkie from browser
- res.render("home.ejs")
+ res.redirect("/list")
  
 })
 
@@ -104,7 +120,6 @@ app.use("/list/user",userRoute)
 //        res.cookie("name","Hari")
 //        res.send("saved!!")
 // })
-
 
 
 

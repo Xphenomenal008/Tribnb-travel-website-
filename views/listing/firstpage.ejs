@@ -1,28 +1,119 @@
 <% layout("../layouts/boilerplate") %>
 <head>
-    <link rel="stylesheet" href="/css/first.css"> <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/first.css"> 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-     
 
-    <main class="container-fluid">
-        
+<main>
+    <!-- Full-Width Form -->
+    <form method="get" action="/list/category" id="logos" class="mb-1 mt-0">
+        <button     type="submit" name="action" value="trending"   class="category-btn">
+            <i class="fa-solid fa-fire"></i>
+            <span>Trending</span>
+        </button>
+        <button     type="submit" name="action" value="Rooms"  class="category-btn">
+            <i class="fa-solid fa-house"></i>
+            <span>Rooms</span>
+        </button>
+        <button    type="submit" name="action" value="Iconiccities"   class="category-btn">
+            <i class="fa-solid fa-star"></i>
+            <span>Iconicities</span>
+        </button>
+        <button     type="submit" name="action" value="Mountains"  class="category-btn">
+            <i class="fa-solid fa-tree"></i>
+            <span>Mountains</span>
+        </button>
+        <button    type="submit" name="action" value="Castles"   class="category-btn">
+            <i class="fa-solid fa-building"></i>
+            <span>Castles</span>
+        </button>
+        <button    type="submit" name="action" value="Amazing Pools"   class="category-btn">
+            <i class="fa-solid fa-water"></i>
+            <span>Amazing Pools</span>
+        </button>
+        <button     type="submit" name="action" value="Farm"  class="category-btn">
+            <i class="fa-solid fa-leaf"></i>
+            <span>Farm</span>
+        </button>
+        <button    type="submit" name="action" value="Artic"   class="category-btn">
+            <i class="fa-solid fa-snowflake"></i>
+            <span>Arctics</span>
+        </button>
+        <button    type="submit" name="action" value="Domes"   class="category-btn">
+            <i class="fa-solid fa-circle"></i>
+            <span>Domes</span>
+        </button>
+        <button    type="submit" name="action" value="Boats"   class="category-btn">
+            <i class="fa-solid fa-ship"></i>
+            <span>Boats</span>
+        </button>
 
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 row-cols-xxl-3  g-4">
+        <!-- Toggler for "Display After Taxes" -->
+        <div id="Toggler">
+            <label class="fw-bold mb-0 me-2">Display after taxes</label>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="taxToggler">
+            </div>
+        </div>
+    </form>
+
+    <!-- Dynamic Data Cards -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 row-cols-xxl-3 g-4 ">
+        <% if (Array.isArray(data)) { %> 
             <% data.forEach((item) => { %>
-                <div class="col first-page mb-4 px-6 ">
+                <div class="col first-page">
                     <a href="/list/<%= item.id %>" class="text-decoration-none">
                         <div class="card shadow-sm h-100">
-                            <img src="<%= item.image.url %>" class="card-img-top " alt="Image">
+                            <img src="<%= item.image.url %>" class="card-img-top" alt="Image">
                             <div class="card-body">
                                 <h5 class="card-title text-dark fw-bold"><%= item.title %></h5>
-                                <p class="text-muted"><%= item.description %></p>
-                                <h6 class="text-success fw-bold">₹<%= item.price %></h6>
+                                <div class="tax">
+                                    <h6 class="text-success fw-bold">₹<%= item.price.toLocaleString("en-IN") %></h6>
+                                    <i id="tax-info">&nbsp; &nbsp;+18% GST</i>
+                                </div>
                             </div>
                         </div>
                     </a>
                 </div>
             <% }); %>
-        </div>
-    </main>
+        <% } else if (typeof data === "object") { %> 
+            <!-- Single object case -->
+            <div class="col first-page">
+                <a href="/list/<%= data.id %>" class="text-decoration-none">
+                    <div class="card shadow-sm h-100">
+                        <img src="<%= data.image.url %>" class="card-img-top" alt="Image">
+                        <div class="card-body">
+                            <h5 class="card-title text-dark fw-bold"><%= data.title %></h5>
+                            <div class="tax">
+                                <h6 class="text-success fw-bold">₹<%= data.price.toLocaleString("en-IN") %></h6>
+                                <i id="tax-info">&nbsp; &nbsp;+18% GST</i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        <% }%> 
+    </div>
+    
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    let taxinfo=document.querySelectorAll("#tax-info")
+    let toggler=document.querySelector(".form-check-input")
+    toggler.addEventListener("change",()=>{
+        console.log(toggler.checked)
+       taxinfo.forEach((info)=>{
+        if (toggler.checked) { 
+        info.style.visibility = "visible";
+    } else {
+    info.style.visibility = "hidden"; 
+    }
+       })
+        
+    })
+     
+</script>
 </body>

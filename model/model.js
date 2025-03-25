@@ -1,16 +1,13 @@
 const mongoose = require("mongoose");
-const review=require("./review")
+const review=require("./review");
+const { string } = require("joi");
 
 const schema = new mongoose.Schema({
   title: String,
   description: String,
   image: {
-    filename: { type: String, default: "https://unsplash.com/photos/silhouette-of-trees-during-sunset-7Ai0UwqqADs" },
-    url: {
-      type: String,
-      default:
-        "https://unsplash.com/photos/silhouette-of-trees-during-sunset-7Ai0UwqqADs",
-    },
+     url:String,
+     filename:String
   },
   price: Number,
   location: String,
@@ -24,6 +21,10 @@ const schema = new mongoose.Schema({
   owner:{ //this is how which each list we attch his user
          type:mongoose.Schema.Types.ObjectId,
          ref:"user" //where all the user has been stored ---ensure your name is same as your collection
+  },
+  category:{
+    type:String,
+    enum:["Mountains","Rooms","Farm","Artic","Amazing pools","Camping","Domes","Boats"]
   }
 });
 schema.post("findOneAndDelete",async(list)=>{
